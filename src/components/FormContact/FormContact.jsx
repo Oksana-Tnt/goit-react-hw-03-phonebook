@@ -51,7 +51,7 @@ const FormContact = ({addContact}) => {
         </div>
         <div className="mb-3">
           <button type="submit" className="btn btn-primary mb-3" >
-            Add contact
+          Add Contact
           </button>
         </div>
       </Form>

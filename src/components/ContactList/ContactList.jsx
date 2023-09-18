@@ -1,23 +1,19 @@
+import Contact from 'components/Contact/Contact';
 import React from 'react';
+
 const ContactList = ({ contacts, onDeleteContact }) => (
   <ul className="list-group">
-    {contacts.map(contacts => (
+    {contacts.map(({id,name,number}) => (
       <li
-        key={contacts.id}
+        key={id}
         className="list-group-item justify-content-md-center"
-      >
-        <div className="d-grid gap-2 d-flex justify-content-between">
-          {contacts.name} : {contacts.number}
-          <button
-            className="btn btn btn-outline-success btn-sm bg-dark"
-            onClick={() => onDeleteContact(contacts.id)}
-          >
-            Delete
-          </button>
-        </div>
+      >        
+        <Contact name={name} number={number} onDeleteContact={()=>onDeleteContact(id)}/>
+
       </li>
     ))}
   </ul>
 );
 
 export default ContactList;
+                                                      
