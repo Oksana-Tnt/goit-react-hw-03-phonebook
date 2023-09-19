@@ -23,30 +23,28 @@ export class App extends Component {
     }
 
     window.addEventListener('keydown', this.handleKeyDown);
-      
-    
   }
-  
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
 
-  componentWillUnmount(){
-    window.removeEventListener("keydown", this.handleKeyDown);
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  handleKeyDown = e=>{
-    if(e.code==='Escape'){      
+  handleKeyDown = e => {
+    if (e.code === 'Escape') {
       this.toggleModal();
-   }
-  }
-  handleBackdropClick = e =>{
-    if(e.currentTarget===e.target){
-     this.toggleModal();
     }
-  }
+  };
+  handleBackdropClick = e => {
+    if (e.currentTarget === e.target) {
+      this.toggleModal();
+    }
+  };
   addContact = ({ name, number }) => {
     const { contacts } = this.state;
     if (
@@ -92,21 +90,24 @@ export class App extends Component {
   toggleModal = () => {
     this.setState(({ isShowModal }) => ({ isShowModal: !isShowModal }));
   };
-  
+
   render() {
     const { filter } = this.state;
     const filteredContacts = this.getFilteredContacts();
 
     return (
-    
       <Container>
         <Header showModal={this.toggleModal} />
         <Filter value={filter} onChange={this.onChangeFilter} />
         {this.state.isShowModal && (
-          <Modal closeModal={this.toggleModal} handleBackdropClick={this.handleBackdropClick}>
+          <Modal
+            closeModal={this.toggleModal}
+            handleBackdropClick={this.handleBackdropClick}
+          >
             <FormContact addContact={this.addContact} />
           </Modal>
         )}
+
         <ContactList
           contacts={filteredContacts}
           onDeleteContact={this.deleteContact}
